@@ -59,6 +59,25 @@
 
 <script>
 
+  window.addEventListener('keydown', function (e) {
+    const audioKey = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    if (!audioKey) return;
+    audioKey.currentTime = 0; //rewind the audio to start
+    audioKey.play();
+    //console.log(audioKey);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    key.classList.add('playing');
+    
+  } );
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', endtransition));
+
+  function endtransition(e) {
+    if (e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+  
 </script>
 
 
